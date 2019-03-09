@@ -367,5 +367,5 @@ const char *getBoxType()
 void dump_malloc_stats(void)
 {
 	struct mallinfo mi = mallinfo();
-	eDebug("MALLOC: %d total", mi.u
+	eDebug("MALLOC: %d total", mi.uordblks);
 }
