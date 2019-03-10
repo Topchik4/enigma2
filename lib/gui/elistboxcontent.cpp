@@ -7,21 +7,17 @@
     The basic idea is to have an interface which gives all relevant list
     processing functions, and can be used by the listbox to browse trough
     the list.
-
     The listbox directly uses the implemented cursor. It tries hard to avoid
     iterating trough the (possibly very large) list, so it should be O(1),
     i.e. the performance should not be influenced by the size of the list.
-
     The list interface knows how to draw the current entry to a specified
     offset. Different interfaces can be used to adapt different lists,
     pre-filter lists on the fly etc.
-
 		cursorSave/Restore is used to avoid re-iterating the list on redraw.
 		The current selection is always selected as cursor position, the
     cursor is then positioned to the start, and then iterated. This gives
     at most 2x m_items_per_page cursor movements per redraw, indepenent
     of the size of the list.
-
     Although cursorSet is provided, it should be only used when there is no
     other way, as it involves iterating trough the list.
  */
@@ -383,7 +379,6 @@ void eListboxPythonConfigContent::paint(gPainter &painter, eWindowStyle &style, 
 
 			/* the first tuple element is a string for the left side.
 			   the second one will be called, and the result shall be an tuple.
-
 			   of this tuple,
 			   the first one is the type (string).
 			   the second one is the value. */
@@ -1150,10 +1145,7 @@ void eListboxPythonMultiContent::paint(gPainter &painter, eWindowStyle &style, c
 					clearRegion(painter, style, local_style, ePyObject(), ePyObject(), pbackColor, pbackColorSelected, selected, rc, sel_clip, offset, m_itemsize, cursorValid, mustClear);
 				}
 				flags |= (type == TYPE_PIXMAP_ALPHATEST) ? gPainter::BT_ALPHATEST : (type == TYPE_PIXMAP_ALPHABLEND) ? gPainter::BT_ALPHABLEND : 0;
-				if (flags & gPainter::BT_SCALE)
-					painter.blitScale(pixmap, rect, rect, flags);
-				else
-					painter.blit(pixmap, rect.topLeft(), rect, flags);
+				painter.blit(pixmap, rect, rect, flags);
 				painter.clippop();
 				break;
 			}
