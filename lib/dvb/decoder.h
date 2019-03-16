@@ -140,7 +140,6 @@ public:
 
 		/*
 		The following states exist:
-
 		 - stop: data source closed, no playback
 		 - pause: data source active, decoder paused
 		 - play: data source active, decoder consuming
